@@ -17,8 +17,9 @@ def main():
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
     results = []
-    for examples in tqdm(translator(data["wn_definition"].tolist(),
-                                    batch_size=8)):
+    definitions = data["wn_definition"].tolist()
+    for examples in tqdm(translator(definitions, batch_size=8),
+                         total=len(definitions)):
         results.extend(examples)
     data["lux_definition"] = results
     data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
