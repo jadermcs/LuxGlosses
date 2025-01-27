@@ -17,7 +17,7 @@ def main():
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
     tqdm.pandas(desc="Analyzing sentiment")
-    df["lux_definition"] = df["wn_definition"].progress_apply(lambda x: translator(x)[0])
+    data["lux_definition"] = data["wn_definition"].progress_apply(lambda x: translator(x)[0])
 
     data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
 
