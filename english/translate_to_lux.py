@@ -15,7 +15,10 @@ def main():
             tgt_lang="ltz_Latn",
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
-    data["lux_definition"] = translator(data["wn_definition"].tolist())
+    results = []
+    for examples in translator(data["wn_definition"].tolist(), batch_size=8):
+        results.extend(examples)
+    data["lux_definition"] = results
     data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
 
 
