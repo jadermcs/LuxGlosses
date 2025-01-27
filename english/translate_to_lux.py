@@ -16,6 +16,7 @@ def main():
             tgt_lang="ltz_Latn",
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
+    data = data[data.confidence > 0.8]
     tqdm.pandas(desc="Analyzing sentiment")
     data["lux_definition"] = data["wn_definition"].progress_apply(lambda x: translator(x)[0])
 

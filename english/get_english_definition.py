@@ -16,6 +16,7 @@ def main():
     data = pd.read_csv("data/lod_english_word.csv", sep="\t")
     data = data.groupby("meaning").first()
     data["wn_definition"] = pd.NA
+    data["confidence"] = pd.NA
     for idx, row in tqdm(data.iterrows(), total=data.shape[0]):
         if not row["en_word"] or not row["en_definition"]:
             continue
@@ -27,7 +28,9 @@ def main():
 
         similarities = model.similarity(sentences1, sentences2)
         argmax = similarities.argmax().item()
+        valuemax = similarities.max().item()
         data.loc[idx, "wn_definition"] = definitions[argmax]
+        data.loc[idx, "confidence"] = valuemax
 
     data.dropna().to_csv("data/english_definitions.csv", sep="\t", index=False)
 
