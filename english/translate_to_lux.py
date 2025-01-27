@@ -16,7 +16,7 @@ def main():
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
     data["lux_definition"] = translator(data["wn_definition"].values)
-    data.dropna().to_csv("with_lux_definitions.csv", sep="\t", index=False)
+    data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
 
 
 if __name__ == "__main__":
