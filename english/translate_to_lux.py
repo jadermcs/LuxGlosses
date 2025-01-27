@@ -1,4 +1,5 @@
 import pandas as pd
+from tqdm import tqdm
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from transformers import pipeline
 
@@ -16,7 +17,8 @@ def main():
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
     results = []
-    for examples in translator(data["wn_definition"].tolist(), batch_size=8):
+    for examples in tqdm(translator(data["wn_definition"].tolist(),
+                                    batch_size=8)):
         results.extend(examples)
     data["lux_definition"] = results
     data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
