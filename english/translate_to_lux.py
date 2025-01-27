@@ -16,12 +16,9 @@ def main():
             tgt_lang="ltz_Latn",
             max_length=400)
     data = pd.read_csv("data/english_definitions.csv", sep="\t")
-    results = []
-    definitions = data["wn_definition"].tolist()
-    for examples in tqdm(translator(definitions, batch_size=8),
-                         total=len(definitions)):
-        results.extend(examples)
-    data["lux_definition"] = results
+    tqdm.pandas(desc="Analyzing sentiment")
+    df["lux_definition"] = df["wn_definition"].progress_apply(lambda x: translator(x)[0])
+
     data.dropna().to_csv("data/lod_lux_definitions.csv", sep="\t", index=False)
 
 
