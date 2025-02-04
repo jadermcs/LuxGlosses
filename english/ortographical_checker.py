@@ -1,29 +1,12 @@
-import hunspell
-from nltk.tokenize import word_tokenize
-
-
-def lux_spell(dic_path, aff_path):
-    hunchecker = hunspell.HunSpell(dic_path, aff_path)
-    return hunchecker
+import spellux
 
 
 if __name__ == "__main__":
 
-    dic_path = "data/lux.dic"
-    aff_path = "data/lux.aff"
-    checker = lux_spell(dic_path, aff_path)
+    with open("data/misspell.txt") as fin:
+        for line in fin.readlines():
+            line = line.rstrip()
+            correct = spellux.normalize_text(line, stats=False)
+            print(correct)
 
-    examples = [
-            "eng Kammer, an där de Kolben bewegt"
-            ]
-    for example in examples:
-        print("Original:", example)
-        print("Corrected:", end=" ")
-        for word in word_tokenize(example):
-            if checker.spell(word):
-                print(word, end=" ")
-            else:
-                suggestion = checker.suggest(
-                    word,
-                    )
-                print(suggestion[0], end=" ")
+    spellux.update_resources(matchdict=True, unknown=False, reset_matchdict=False)

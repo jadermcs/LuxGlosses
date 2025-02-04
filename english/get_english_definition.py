@@ -14,6 +14,7 @@ def get_definition(word):
 
 def main():
     data = pd.read_csv("data/lod_english_word.csv", sep="\t")
+    data["code"] = data["meaning"]
     data = data.groupby("meaning").first()
     data["wn_definition"] = pd.NA
     data["confidence"] = pd.NA
