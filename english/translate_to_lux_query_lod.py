@@ -54,7 +54,7 @@ for i, row in data[:50].iterrows():
 
     lux_definition = response.replace('Luxembourgish translation of definition: ', '')
 
-    corrected = spellux.normalize(lux_definition, stats=False)
+    corrected = spellux.normalize_text(lux_definition, stats=False)
     if corrected != lux_definition:
         messages += [{"role": "user", "content": f"The spell checker said the correct written is: '{corrected}', can you verify your answer."}]
         response = client.chat.completions.create(
