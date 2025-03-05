@@ -5,7 +5,7 @@ from openai import OpenAI
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 
-with open("test.json") as fin:
+with open("test.jsonl") as fin:
     for line in fin.readlines():
         data = json.loads(line)
         completion = client.chat.completions.create(
@@ -16,7 +16,7 @@ with open("test.json") as fin:
         print(completion.choices[0].message)
         break
 
-with open("test.json") as fin:
+with open("test.jsonl") as fin:
     for line in fin.readlines():
         data = json.loads(line)
         completion = client.chat.completions.create(
