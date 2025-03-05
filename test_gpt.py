@@ -8,7 +8,7 @@ client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 with open("test.jsonl") as fin:
     for line in fin.readlines():
         data = json.loads(line)
-        answer = data[-1].copy()
+        answer = data[-1]["content"]
         del data[-1]
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -16,12 +16,13 @@ with open("test.jsonl") as fin:
         )
 
         print(completion.choices[0].message)
+        print(answer)
         break
 
 with open("test.jsonl") as fin:
     for line in fin.readlines():
         data = json.loads(line)
-        answer = data[-1].copy()
+        answer = data[-1]["content"]
         del data[-1]
         completion = client.chat.completions.create(
             model="ft:gpt-4o-mini-2024-07-18:list:letz-semantics:B7kHXZud",
@@ -29,4 +30,5 @@ with open("test.jsonl") as fin:
         )
 
         print(completion.choices[0].message)
+        print(answer)
         break
