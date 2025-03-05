@@ -19,7 +19,7 @@ for example in letz["train"]:
     options = "\n".join([f"{x}) {choices[idx]}" for idx, x in enumerate("ABCD")])
     json = {"messages": [
         {"role": "system", "content": "You are a helpful assistant specialized in Luxembourgish meaning."},
-        {"role": "user", "content": f"What synonym word is contained in '{example['text']}': \n{options}"}
+        {"role": "user", "content": f"What synonym word is contained in '{example['text']}': \n{options}"},
         {"role": "assistant", "content": f"{word}"}
         ]}
     print(json)
