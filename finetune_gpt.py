@@ -1,28 +1,25 @@
 import json
-import random
-from datasets import load_dataset
+import pandas as pd
 
-letz = load_dataset("fredxlpy/LETZ", "LETZ-SYN")
+df = pd.read_csv("data/lod_english_word.csv", sep="\t").sample(frac=1.)
 
-words = letz["train"]["label"]
-
-NUM = 4
+test = open("test.jsonl", "w")
 
 for mode in ["train", "test"]:
-    count = 0
+    filtered = df.lemma <= "J"
+    if mode == "test":
+        filtered != filtered
     with open(f"{mode}.jsonl", "w") as fout:
-        for example in letz[mode]:
+        count = 0
+        for idx, row in df[df.lemma <= "J"].groupby("en_word").first().reset_index().iterrows():
             count += 1
-            choices = random.choices(words, k=NUM)
-            i = random.randint(0, NUM-1)
-            word = example["label"]
-            choices[i] = word
-            options = "\n".join([f"{x}) {choices[idx]}" for idx, x in enumerate("ABCD")])
+            word = row["en_word"]
+            lux_word = row["lemma"]
             data = {"messages": [
-                {"role": "system", "content": "You are a helpful assistant specialized in Luxembourgish meaning."},
-                {"role": "user", "content": f"What synonym word is contained in '{example['text']}': \n{options}"},
-                {"role": "assistant", "content": f"{'ABCD'[i]}) {word}"}
+                {"role": "system", "content": "You are a helpful assistant specialized in Luxembourgish language."},
+                {"role": "user", "content": f"In the sentence '{row['sentence']}' what is the meaning of '{lux_word}', answer with maximum 5 words."},
+                {"role": "assistant", "content": f"{word}"}
                 ]}
             fout.write(json.dumps(data)+"\n")
-            if count >= 100:
+            if count >= 1000:
                 break
