@@ -56,13 +56,11 @@ for i, row in data[:50].iterrows():
 
     corrected = spellux.normalize_text(lux_definition, stats=False)
     if corrected != lux_definition:
-        messages += [{"role": "user", "content": f"The spell checker said the correct written is: '{corrected}', can you verify your answer."}]
+        messages += [{"role": "user", "content": f"The spell checker said it is not written correcly, can you verify your answer."}]
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=messages).choices[0].message.content
-        print(response)
-        exit()
-
+        lux_definition = response.splitlines().replace('Luxembourgish translation of definition: ', '')
 
     data.loc[i, 'lux_definition'] = lux_definition
 
@@ -72,6 +70,3 @@ for i, row in data[:50].iterrows():
     print('Luxembourgish translation: ', lux_definition)
 
 data.dropna().to_csv("data/lod_lux_definitions_fewshot.csv", sep="\t", index=False)
-
-
-
