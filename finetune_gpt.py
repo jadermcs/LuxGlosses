@@ -1,19 +1,17 @@
-import os
 import json
 import random
-from openai import OpenAI
 from datasets import load_dataset
-
-client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 letz = load_dataset("fredxlpy/LETZ", "LETZ-SYN")
 
 words = letz["train"]["label"]
 
 NUM = 4
+count = 0
 
-with open("train.json", "w") as fout:
+with open("train.jsonl", "w") as fout:
     for example in letz["train"]:
+        count += 1
         choices = random.choices(words, k=NUM)
         i = random.randint(0, NUM-1)
         word = example["label"]
@@ -25,10 +23,5 @@ with open("train.json", "w") as fout:
             {"role": "assistant", "content": f"{'ABCD'[i]}) {word}"}
             ]}
         fout.write(json.dumps(data)+"\n")
-
-# response = client.fine_tuning.jobs.create(
-#     training_file="file-abc123",
-#     model="gpt-4o-mini-2024-07-18"
-# )
-
-
+        if count >= 100:
+            break
