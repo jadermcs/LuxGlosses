@@ -18,12 +18,11 @@ for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:
                 messages=data
             )
 
-            print(completion.choices[0].message)
-            print(answer)
             response = completion.choices[0].message.content.split("\n")[-1]
             if answer in response.lower():
                 correct += 1
             count += 1
-            break
+            if count >= 100:
+                break
 
     print(correct/count)
