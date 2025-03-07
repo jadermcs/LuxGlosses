@@ -20,7 +20,8 @@ for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:
 
             print(completion.choices[0].message)
             print(answer)
-            if answer in completion.choices[0].message.content:
+            response = completion.choices[0].message.content.split("\n")[-1]
+            if answer in response.lower():
                 correct += 1
             count += 1
             break
