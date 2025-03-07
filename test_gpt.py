@@ -9,7 +9,7 @@ for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:
     correct = 0
     with open("test.jsonl") as fin:
         for line in fin.readlines():
-            data = json.loads(line)
+            data = json.loads(line)["messages"]
             answer = data[-1]["content"]
             del data[-1]
             completion = client.chat.completions.create(
