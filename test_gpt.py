@@ -4,31 +4,24 @@ from openai import OpenAI
 
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
+for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:B7n1076x"]:
+    count = 0
+    correct = 0
+    with open("test.jsonl") as fin:
+        for line in fin.readlines():
+            data = json.loads(line)
+            answer = data[-1]["content"]
+            del data[-1]
+            completion = client.chat.completions.create(
+                model=model_name,
+                messages=data
+            )
 
-with open("test.jsonl") as fin:
-    for line in fin.readlines():
-        data = json.loads(line)
-        answer = data[-1]["content"]
-        del data[-1]
-        completion = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=data
-        )
+            print(completion.choices[0].message)
+            print(answer)
+            if answer in completion.choices[0].message.lower():
+                correct += 1
+            count += 1
+            break
 
-        print(completion.choices[0].message)
-        print(answer)
-        break
-
-with open("test.jsonl") as fin:
-    for line in fin.readlines():
-        data = json.loads(line)
-        answer = data[-1]["content"]
-        del data[-1]
-        completion = client.chat.completions.create(
-            model="ft:gpt-4o-mini-2024-07-18:list:letz-semantics:B7kHXZud",
-            messages=data
-        )
-
-        print(completion.choices[0].message)
-        print(answer)
-        break
+    print(correct/count)
