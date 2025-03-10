@@ -7,7 +7,7 @@ client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 glosses = pd.read_csv("glosses.tsv", sep="\t")
 
-for model_name in ["ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
+for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
     ref = []
     pred = []
     count = 0
