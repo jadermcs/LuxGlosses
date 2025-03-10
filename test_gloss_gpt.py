@@ -24,11 +24,9 @@ for model_name in ["ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
         )
 
         response = completion.choices[0].message.content.split("\n")[-1].split(":")[-1]
-        pred.append(response)
-        defs = [x for x in row[["definition1", "definition2"]].dropna().tolist() if x]
-        ref.append(defs)
+        pred.append((word, response))
         count += 1
 
     with open(f"{model_name}.txt", "w") as fout:
-        for line in pred:
-            fout.write(line+"\n")
+        for word, definition in pred:
+            fout.write(f"{word}\t{definition}\n")
