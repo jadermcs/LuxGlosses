@@ -9,7 +9,7 @@ glosses = pd.read_csv("glosses.tsv", sep="\t")
 
 bleu = evaluate.load("bleu")
 
-for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:B7n1076x"]:
+for model_name in ["ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
     ref = []
     pred = []
     for idx, row in glosses.iterrows():
@@ -17,7 +17,7 @@ for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lod-translate:
         word = row["word"]
         data = [
             {"role": "system", "content": "You are a helpful assistant specialized in Luxembourgish language."},
-            {"role": "user", "content": f"In the sentence '{sentence}' what is the definition of '{word}'? Give the definition in Luxembourgish. After reasoning give the answer in the last line."},
+            {"role": "user", "content": f"In the sentence '{sentence}' what is the definition of '{word}'? Give the definition in Luxembourgish the definition should not contain the word itself. After reasoning give the answer in the last line."},
             ]
         print(data)
         completion = client.chat.completions.create(
