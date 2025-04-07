@@ -7,7 +7,7 @@ df = df.dropna(subset="en_word")
 test = open("test.jsonl", "w")
 
 for mode in ["train", "test"]:
-    filtered = df.lemma >= "J" if mode == "train" else df.lemma < "J"
+    filtered = df.lemma != ""
     df_group = df[filtered].groupby("lemma").first().reset_index().sample(frac=1.)
     with open(f"{mode}.jsonl", "w") as fout:
         count = 0
