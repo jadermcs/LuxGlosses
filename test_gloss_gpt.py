@@ -9,8 +9,7 @@ glosses = pd.read_csv("data/english_definitions.csv", sep="\t")
 glosses = glosses[glosses.confidence > 0.6].groupby("wn_definition").first().reset_index()
 print(glosses)
 
-for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
-    ref = []
+for model_name in ["ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9V61v1e"]:
     pred = []
     count = 0
     for idx, row in tqdm(glosses.iterrows(), total=glosses.shape[0]):
@@ -25,10 +24,8 @@ for model_name in ["gpt-4o-mini", "ft:gpt-4o-mini-2024-07-18:list:lets-phrase:B9
         )
 
         response = completion.choices[0].message.content.split("\n")[-1].split(":")[-1]
-        pred.append((row["sentence"], sentence, row["confidence"], response))
+        pred.append(response)
         count += 1
 
-    with open(f"{model_name}_definition.txt", "w") as fout:
-        for element in pred:
-            element = "\t".join(element) + "\n"
-            fout.write(element)
+    glosses["gpt_fine_tune"] = pred
+    glosses.to_csv(f"{model_name}_definition.csv", sep="\t", index=False)
