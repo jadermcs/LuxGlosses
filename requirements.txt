@@ -1,5 +1,7 @@
 nltk
+fuzzywuzzy
 pandas
 transformers
+spacy
 sentence-transformers
 openai
