@@ -1,0 +1,51 @@
+lemma	pos	en_word	en_definition	sentence	code	wn_definition	confidence	lux_definition
+A	SUBST	eye	organ of sight	déi Blus passt gutt bei deng blo Aen 	A1UNI1	the organ of sight	0.963575839996338	D'Organ vum Sënn fir déi Sich.
+A	SUBST	eye	organ of sight	hie kuckt mam rietsen A an déi lénks Täsch 	A1UNI1_EGS	the organ of sight	0.963575839996338	D'Organ vum Bléck
+alliéiert	ADJ	allied	by treaty, by agreement	déi alliéiert Zaldote goufen agesat, fir de Fridden ze sécheren 	ALLIEIERT1UNI1	joined by treaty or agreement	0.80345618724823	Gemaach duerch e Vertrag oder eng Aavereenegung.
+anachronistesch	ADJ	anachronistic	misplaced chronologically	eng Auer an engem Film iwwer d'Urmënschen ass en anachronistescht Element 	ANACHRONISTESCH1UNI2	chronologically misplaced	0.9727715849876404	Chronologesch falsch placéiert
+Ännerung	SUBST	change	modification, alteration	d'Deputéiert hunn eng Ännerung vum Gesetzestext virgeschloen 	ANNERUNG1UNI1	the result of alteration or modification	0.8138492107391357	D'Resultat vun enger Ännerung oder Modifikatioun
+Ännerung	SUBST	change	modification, alteration	et ass eng Ännerung an der Luucht 	ANNERUNG1UNI1_EGS	the result of alteration or modification	0.8138492107391357	D'Resultat vun enger Veraenderung oder Modifikatioun
+antik	ADJ	ancient	very old	d'Archeologe sinn op d'Ruine vun engem anticken Theater aus der Réimerzäit gestouss 	ANTIK1UNI2	very old	1.0	Zesummen, ganz al
+apostoulesch	ADJ	apostolic	relating to the Apostles	mir goufe geléiert, un déi eng, helleg, kathoulesch an apostoulesch Kierch ze gleewen 	APOSTOULESCH1UNI1	of or relating to or deriving from the Apostles or their teachings	0.846702516078949	Vun oder bezunn op d'Apostelen oder hiert Léier.
+athleetesch	ADJ	athletic	relating to athletics	ech bréngen déi komplizéiert athleetesch Übungen do net fäerdeg 	ATHLEETESCH1UNI1	relating to or befitting athletics or athletes	0.8543497323989868	Zesummenhänkt mat oder passend fir Sport oder Sportler
+autistesch	ADJ	autistic	characteristic of autism	a sengem Behuele weist d'Kand autistesch Symptomer 	AUTISTESCH1UNI2	characteristic of or affected with autism	0.8913791179656982	Eegenschaftlich fir oder betraff vun Autismus
+Balance	SUBST	balance	equilibrium	de Seeldänzer däerf d'Balance net verléieren, soss riskéiert en erofzefalen 	BALANCE1UNI1	be in equilibrium	0.8582607507705688	An engem Gläichgewiicht sinn
+Band	SUBST	gang	group of criminals	eng Band Täschendéif mécht d'Stad onsécher 	BAND2UNI2	an association of criminals	0.8289496302604675	Eng Assoziatioun vu Kriminellen
+bestralen	VRB	to irradiate	to expose to radiation	deen Tumeur muss bestraalt ginn 	BESTRALEN1UNI1	expose to radiation	0.8806604743003845	Exposéieren un Strahlung
+Bëtschel	SUBST	kid	young goat	mir hunn um Véimaart zwee Bëtschele kaaft 	BETSCHEL1UNI1	young goat	1.0000001192092896	Jonge Geess, déi nach net erwuess ass.
+Bëtschel	SUBST	kid	young goat	elo ass d'Bëtschel fett! 	BETSCHEL1UNI1_EGS	young goat	1.0000001192092896	Jonk Geiss
+blockéieren	VRB	to block	to obstruct	d'Demonstrante blockéieren d'Strooss 	BLOCKEIEREN1UNI1	obstruct	0.8667787313461304	ewechhuelen oder hindern
+braconéieren	VRB	to poach	to hunt illegally	an der Zäit hunn d'Leit dacks aus Nout braconéiert 	BRACONEIEREN1UNI1	hunt illegally	0.8201436400413513	Illegal jagen
+datéieren	VRB	to date	to mark with a date	de Bréif muss nach datéiert ginn 	DATEIEREN1UNI1	stamp with a date	0.8002471327781677	Mat engem Datum stempelen
+Datum	SUBST	date	day of the month or year	kommt, mir verleeën d'Versammlung op e spéideren Datum ! 	DATUM1UNI1	the specified day of the month	0.8252881765365601	Den déi bestoend Dag vum Mount
+Disziplin	SUBST	discipline	branch of knowledge	ass d'Homeopathie als wëssenschaftlech Disziplin unerkannt? 	DISZIPLIN1UNI3	a branch of knowledge	0.9599902629852296	Eng Branch vum wëssen
+Dominikaner	SUBST	Dominican	person from the Dominican Republic	mäi beschte Frënd ass Dominikaner 	DOMINIKANER1UNI1	a native or inhabitant of the Dominican Republic	0.8251112103462219	E gebuert oder ewéi et ee wunnt an der Dominikanescher Republik
+dout maachen	VRB	to kill	to cause the death of	hien ass esou en duusse Kärel, e kann net emol eng Méck dout maachen 	DOUTMAACHEN1UNI1	cause to die; put to death, usually intentionally or knowingly	0.8040356636047363	Verursaachen, dass et stirbt; ëmbréngen, normalerweis absichtlech oder am Bewosstseins iwwer déi Konsequenzen.
+dreckeg	ADJ	dirty	dishonest, unethical	eis Clique gouf an eng dreckeg Affär eragezunn 	DRECKEG1UNI3	unethical or dishonest	0.9217058420181274	Onethesch oder onärlech
+dreckeg	ADJ	dirty	dishonest, unethical	mir geet et am Ament zimmlech dreckeg ! 	DRECKEG1UNI3_EGS	unethical or dishonest	0.9217058420181274	Onethesch oder onärschtegt
+ënnerierdesch	ADJ	underground	beneath the ground	op der Maartplaz gëtt en neien ënnerierdesche Parking gebaut 	ENNERIERDESCH1UNI1	beneath the surface of the earth	0.8629878759384155	Ënner der Uewerfläch vun der Äerd
+Equiliber	SUBST	balance	equilibrium	de Cyclist huet den Equiliber verluer an ass vum Vëlo gefall 	EQUILIBER1UNI3	be in equilibrium	0.8582607507705688	Am Equiliber sinn.
+erschafen	VRB	to create	to bring into existence	der Bibel no gouf d'Welt vu Gott erschafen 	ERESCHAFEN1UNI1	bring into existence	0.8873504400253296	An Existenza bréngen
+Exzess	SUBST	excess	overindulgence	mat sengen Exzesser ruinéiert e seng Gesondheet 	EXZESS1UNI1	excessive indulgence	0.8836401104927063	Exzessiv Séngeldung
+Faveur	SUBST	favour	act of kindness	kéint Dir mir eng Faveur maachen? 	FAVEUR1UNI1	an act of gracious kindness	0.8609245419502258	Eng Aktioun vun grousser Guttmënschkeet
+feelschloen	VRB	to fail	to be unsuccessful	all eis Versich si feelgeschloen 	FEELSCHLOEN1UNI1	be unsuccessful	0.8628107905387878	net erfollegräich sinn
+Feind	SUBST	enemy	personal enemy	hien huet keng Feinden , hie verdréit sech mat jidderengem! 	FEIND1UNI1	a personal enemy	0.9231346249580384	E perséinleche Feind
+Feind	SUBST	enemy	personal enemy	bei esou Frënn brauch ee keng Feinden 	FEIND1UNI1_EGS	a personal enemy	0.9231346249580384	E perséinleche Feind
+fëllen	VRB	to fill	to become full	de Festsall huet sech lues a lues gefëllt 	FELLEN1UNI3	become full	0.8890049457550049	Voll ginn
+Fënster	SUBST	window	opening, window frame, pane of glass	mir kréie méi eng grouss Fënster an der Stuff 	FENSTER1UNI1	a pane of glass in a window	0.8491140604019165	E Stéck Glas an enger Fënster.
+Fënster	SUBST	window	opening, window frame, pane of glass	hien huet (mat béiden Hänn) d'Suen zur Fënster erausgehäit 	FENSTER1UNI1_EGS	a pane of glass in a window	0.8491140604019165	E Stéck Glas an enger Fënster
+fir	PREP	first	before something else	fir d'éischt gëtt geléiert an da kanns de spille goen! 	FIR2UNI10	before anything else	0.8542120456695557	Virdrun alles aneres.
+Forschett	SUBST	fork	item of cutlery	ech iessen de Poulet mat Messer a Forschett 	FORSCHETT1UNI1	cutlery used for serving and eating food	0.8095357418060303	E Besteckstéck, dat fir den Ënnerhalt an d'Iessen vun Iessen benotzt gëtt.
+Forschett	SUBST	fork	item of cutlery	an där Wiertschaft schreiwen se mat der Forschett op! 	FORSCHETT1UNI1_EGS	cutlery used for serving and eating food	0.8095357418060303	Dësen Zorte vu Bettwaren, déi fir d'Déngen an d'Iessen vun Iessen benotzt gëtt.
+fréizäiteg	ADJ	early	at an early stage	eng fréizäiteg Kriibsdiagnos ka Liewe retten 	FREIZAITEG1UNI1	during an early stage	0.8407450318336487	Während enger fréizäiteger Etapp
+Gebuertsdag	SUBST	birthday	anniversary of one's birth	fir säin 18. Gebuertsdag hunn seng Elteren him en Auto geschenkt 	GEBUERTSDAG1UNI1	an anniversary of the day on which a person was born (or the celebration of it)	0.8856374025344849	Eng Jubiläum vum Dag, un deem eng Persoun gebuer gouf (oder d'Feier dovunner)
+Gehéier	SUBST	hearing	ability to hear	mäi Papp huet fir säin Alter nach e ganz gutt Gehéier 	GEHEIER1UNI1	the ability to hear; the auditory faculty	0.8196088075637817	D'Fäegkeet ze héieren; d'auditiv Fäegkeet
+gëllen	ADJ	golden	made of gold	d'Bomi deet hire gëllene Bracelet nëmme sonndes un 	GELLEN1UNI1	made from or covered with gold	0.8440936803817749	Hergestallt aus oder iwwerzéckt mat Gëll.
+gëllen	ADJ	golden	made of gold	de Promoteur huet sech mat dësen Terrainen eng Gëllen Nues verdéngt 	GELLEN1UNI1_EGS	made from or covered with gold	0.8440936803817749	Aus Gold gemaach oder mat Gold bedeckt
+Giedel	SUBST	granny	old woman	d'Giedel huet de Kanner verzielt, wéi d'Leit fréier gelieft hunn 	GIEDEL1UNI1	an old woman	0.922964870929718	Eng al Fra
+Gläichgewiicht	SUBST	balance	equilibrium	de Cyclist huet d'Gläichgewiicht verluer an ass vum Vëlo gefall 	GLAICHGEWIICHT1UNI1	be in equilibrium	0.8582607507705688	Am Gläichgewiicht sinn
+gleewen	VRB	to believe	to accept as true	ech kann deng Geschicht einfach net gleewen 	GLEEWEN1UNI1	accept as true; take to be true	0.8437761068344116	Als wierklech akzeptéieren; fir wäit ze huelen
+gleewen	VRB	to believe	to accept as true	dat gleefs de dach selwer net! 	GLEEWEN1UNI1_EGS	accept as true; take to be true	0.8437761068344116	Als wäit akzeptéieren; fir wäit huelen
+granatevoll	ADJ	plastered	very drunk	nom Summerfest ware mer all granatevoll 	GRANATEVOLL1UNI1	very drunk	1.0000001192092896	ganz alk resonates.
+Grimass	SUBST	face	facial expression	de Bouf huet der Joffer hanner dem Réck Grimasse geschnidden 	GRIMASS1UNI1	a contorted facial expression	0.8156872987747192	Eng verdreit Gesiichtsäusserung
+grondéieren	VRB	to prime	to cover with a primer	den Usträicher huet d'Mauer scho grondéiert 	GRONDEIEREN1UNI1	cover with a primer; apply a primer to	0.8385308980941772	Mat enger Grondéierung beschichten; eng Grondéierung applizéieren
