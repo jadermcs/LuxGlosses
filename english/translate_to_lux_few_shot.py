@@ -33,26 +33,30 @@ for j in range(2):
 
 # Load data
 data = pd.read_csv('data/english_definitions.csv', delimiter='\t')
-data = data[data['confidence']>0.6]
+data = data[data['confidence'] > 0.6]
+data = data[~data['code'].str.endswith("_EGS")]
+print(data.shape)
+exit()
 
-for i, row in data.iterrows():
+try:
+    for i, row in data.iterrows():
+        print("Processing example", i)
+        messages = model_inputs + [{"role": "user", "content": f"Luxembourgish word: {row['lemma']}\nEnglish word definition: {row['wn_definition']}"}]
 
-    messages = model_inputs + [{"role": "user", "content": f"Luxembourgish word: {row['lemma']}\nEnglish word definition: {row['wn_definition']}"}]
+        response = client.chat.completions.create(
+            model="gpt-4.5-preview",
+            messages=messages).choices[0].message.content
 
-    response = client.chat.completions.create(
-        model="gpt-4.5-preview",
-        messages=messages).choices[0].message.content
-    
-    lux_definition = response.replace('Luxembourgish translation of definition: ', '')
-    
-    data.loc[i, 'lux_definition'] = lux_definition
+        lux_definition = response.replace('Luxembourgish translation of definition: ', '')
 
-    print('English word: ', row['en_word'])
-    print('Luxembourgish word: ', row['lemma'])
-    print('English definition: ', row['wn_definition'])
-    print('Luxembourgish translation: ', lux_definition)
+        data.loc[i, 'lux_definition'] = lux_definition
+
+        print('English word: ', row['en_word'])
+        print('Luxembourgish word: ', row['lemma'])
+        print('English definition: ', row['wn_definition'])
+        print('Luxembourgish translation: ', lux_definition)
+        print('Confidence: ', data.loc[i, 'confidence'])
+except KeyboardInterrupt:
+    print("interrupted")
 
 data.dropna().to_csv("data/lod_lux_definitions_fewshot_4.5.csv", sep="\t", index=False)
-
-
-

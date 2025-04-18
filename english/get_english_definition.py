@@ -6,8 +6,19 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 
-def get_definition(word):
-    synsets = wn.synsets(word)
+def get_definition(word, pos):
+    if pos in ["NP", "SUBST", "n", "INTERJ", "CONJ"]:
+        pos = wn.NOUN
+    elif pos in ["ADJ", "a"]:
+        pos = wn.ADJ
+    elif pos in ["VRB", "v"]:
+        pos = wn.VERB
+    elif pos in ["ADV"]:
+        pos = wn.ADV
+    else:
+        print(f"Not found {pos} for {word}")
+        return []
+    synsets = wn.synsets(word, pos=pos)
     definitions = [x.definition() for x in synsets]
     return definitions
 
@@ -21,7 +32,8 @@ def main():
     for idx, row in tqdm(data.iterrows(), total=data.shape[0]):
         if not row["en_word"] or not row["en_definition"]:
             continue
-        definitions = get_definition(row["en_word"].removeprefix("to "))
+        definitions = get_definition(row["en_word"].removeprefix("to "),
+                                     row["pos"])
         if not definitions:
             continue
         sentences1 = model.encode(definitions)
