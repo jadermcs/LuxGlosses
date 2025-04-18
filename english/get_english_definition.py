@@ -30,7 +30,7 @@ def main():
     data["wn_definition"] = pd.NA
     data["confidence"] = pd.NA
     for idx, row in tqdm(data.iterrows(), total=data.shape[0]):
-        if not row["en_word"] or not row["en_definition"]:
+        if not row["en_word"] or not row["en_definition"] or row["code"].endswith("_EGS"):
             continue
         definitions = get_definition(row["en_word"].removeprefix("to "),
                                      row["pos"])
