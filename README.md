@@ -16,5 +16,5 @@ python english/get_english_definition.py
 To translate the english definition to Luxembourgish:
 
 ```
-python english/translate_to_lux.py
+python english/translate_to_lux_zero_shot.py
 ```
