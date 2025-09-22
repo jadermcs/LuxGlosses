@@ -1,4 +1,5 @@
 nltk
+matplotlib
 fuzzywuzzy
 pandas
 transformers
