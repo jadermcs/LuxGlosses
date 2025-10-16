@@ -59,13 +59,20 @@ def main():
             continue
         
         # Get definitions from WordNets
-        if row["en_word"] and row["en_definition"]:
+        if row["en_word"]:
+            if not row["en_definition"]:
+                row["en_definition"] = row["en_word"]
             en_definitions = get_definition(row["en_word"].removeprefix("to "), row["pos"], "en")
             de_definitions = get_definition(row["de_word"], row["pos"], "de")
-        if row["de_word"] and row["de_definition"]:
+        if row["de_word"]:
+            if not row["de_definition"]:
+                row["de_definition"] = row["de_word"]
             de_definitions = get_definition(row["de_word"], row["pos"], "de")
             de_definitions = [d for d in de_definitions if d!=None]
-        if row["fr_word"] and row["fr_definition"]:
+            de_definitions = [d for d in de_definitions if ((len(d.split())>=3) and (row["de_word"] not in d))]
+        if row["fr_word"]:
+            if not row["fr_definition"]:
+                row["fr_definition"] = row["fr_word"]
             fr_definitions = get_definition(row["fr_word"], row["pos"], "fr")
             fr_definitions = [d for d in fr_definitions if d!=None]
             fr_definitions = [d for d in fr_definitions if lid_model.predict([d.replace("\n", " ")])[0][0][0]== "__label__eng_Latn"]
@@ -77,14 +84,15 @@ def main():
         if en_definitions and row["en_word"] and row["en_definition"]:
             argmax, valuemax = find_max_similarity(
                 en_definitions, [row["en_definition"]], model_en)
-            data.loc[idx, "wn_definition_en"] = en_definitions[argmax]
-            data.loc[idx, "confidence_en"] = valuemax
+            if valuemax >= 0.6:  # threshold
+                data.loc[idx, "wn_definition_en"] = en_definitions[argmax]
+                data.loc[idx, "confidence_en"] = valuemax
 
         # DE
         if de_definitions and row["de_word"] and row["de_definition"]:
             argmax, valuemax = find_max_similarity(
                 de_definitions, [row["de_definition"]], model_de)
-            if valuemax >= 0.5:  # threshold
+            if valuemax >= 0.6:  # threshold
                 data.loc[idx, "wn_definition_de"] = de_definitions[argmax]
                 data.loc[idx, "confidence_de"] = valuemax
 
@@ -92,11 +100,28 @@ def main():
         if fr_definitions and row["en_word"] and row["en_definition"]:
             argmax, valuemax = find_max_similarity(
                 fr_definitions, [row["en_definition"]], model_en)
-            if valuemax >= 0.5:  # threshold
+            if valuemax >= 0.6:  # threshold
                 data.loc[idx, "wn_definition_fr"] = fr_definitions[argmax]
                 data.loc[idx, "confidence_fr"] = valuemax
 
-    data.dropna(subset=['wn_definition_en', 'wn_definition_de', 'wn_definition_fr'], how="all").to_csv("data/multilingual_definitions.csv", sep="\t", index=False)
+    # Make final decision on which definitions to keep (First EN, then FR, then DE)
+    for i, row in data.iterrows():
+        if not pd.isna(row['wn_definition_en']):
+            data.loc[i, 'wn_definition'] = row['wn_definition_en']
+            data.loc[i, 'definition_language'] = 'en'
+            data.loc[i, 'confidence'] = row['confidence_en']
+            continue
+        if not pd.isna(row['wn_definition_fr']):
+            data.loc[i, 'wn_definition'] = row['wn_definition_fr']
+            data.loc[i, 'definition_language'] = 'fr'
+            data.loc[i, 'confidence'] = row['confidence_fr']
+        if not pd.isna(row['wn_definition_de']):
+            data.loc[i, 'wn_definition'] = row['wn_definition_de']
+            data.loc[i, 'definition_language'] = 'de'
+            data.loc[i, 'confidence'] = row['confidence_de']
+            continue
+
+    data.dropna(subset=['wn_definition']).to_csv("data/multilingual_definitions.csv", sep="\t", index=False)
 
 if __name__ == "__main__":
     main()
