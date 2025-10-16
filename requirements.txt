@@ -6,3 +6,6 @@ transformers
 spacy
 sentence-transformers
 openai
+wn
+protobuf
+fasttext
