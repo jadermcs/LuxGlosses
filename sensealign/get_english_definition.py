@@ -41,6 +41,14 @@ def get_definition(word, pos, lang):
     definitions = [x.definition() for x in synsets]
     return definitions
 
+def find_max_similarity(sentences1, sentences2, model):
+    sentences1 = model.encode(sentences1)
+    sentences2 = model.encode(sentences2)
+    similarities = model.similarity(sentences1, sentences2)
+    argmax = similarities.argmax().item()
+    valuemax = similarities.max().item()
+    return argmax, valuemax
+
 
 def main():
     data = pd.read_csv("data/lod_multilingual_words.csv", sep="\t")
@@ -67,35 +75,23 @@ def main():
 
         # EN
         if en_definitions and row["en_word"] and row["en_definition"]:
-            sentences1 = model_en.encode(en_definitions)
-            sentences2 = model_en.encode(row["en_definition"])
-
-            similarities = model_en.similarity(sentences1, sentences2)
-            argmax = similarities.argmax().item()
-            valuemax = similarities.max().item()
+            argmax, valuemax = find_max_similarity(
+                en_definitions, [row["en_definition"]], model_en)
             data.loc[idx, "wn_definition_en"] = en_definitions[argmax]
             data.loc[idx, "confidence_en"] = valuemax
 
         # DE
         if de_definitions and row["de_word"] and row["de_definition"]:
-            sentences1 = model_de.encode(de_definitions)
-            sentences2 = model_de.encode(row["de_definition"])
-
-            similarities = model_de.similarity(sentences1, sentences2)
-            argmax = similarities.argmax().item()
-            valuemax = similarities.max().item()
+            argmax, valuemax = find_max_similarity(
+                de_definitions, [row["de_definition"]], model_de)
             if valuemax >= 0.5:  # threshold
                 data.loc[idx, "wn_definition_de"] = de_definitions[argmax]
                 data.loc[idx, "confidence_de"] = valuemax
 
         # FR (definitions are always in English)
         if fr_definitions and row["en_word"] and row["en_definition"]:
-            sentences1 = model_en.encode(fr_definitions)
-            sentences2 = model_en.encode(row["en_definition"])
-
-            similarities = model_en.similarity(sentences1, sentences2)
-            argmax = similarities.argmax().item()
-            valuemax = similarities.max().item()
+            argmax, valuemax = find_max_similarity(
+                fr_definitions, [row["en_definition"]], model_en)
             if valuemax >= 0.5:  # threshold
                 data.loc[idx, "wn_definition_fr"] = fr_definitions[argmax]
                 data.loc[idx, "confidence_fr"] = valuemax
