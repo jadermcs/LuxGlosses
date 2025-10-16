@@ -63,7 +63,6 @@ def main():
             if not row["en_definition"]:
                 row["en_definition"] = row["en_word"]
             en_definitions = get_definition(row["en_word"].removeprefix("to "), row["pos"], "en")
-            de_definitions = get_definition(row["de_word"], row["pos"], "de")
         if row["de_word"]:
             if not row["de_definition"]:
                 row["de_definition"] = row["de_word"]
