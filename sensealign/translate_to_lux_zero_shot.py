@@ -4,12 +4,20 @@ import os
 
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
+# Language mapping
+lang_map = {
+    'fr': 'English',
+    'de': 'German',
+    'en': 'English'
+}
+
 # Load data
-data = pd.read_csv('data/english_definitions.csv', delimiter='\t')
-data = data[data['confidence']>0.6]
+data = pd.read_csv('data/multilingual_definitions.csv', delimiter='\t')
+data = data[data['confidence']>=0.6]
+data['definition_language'] = data['definition_language'].map(lang_map)
 
 # Ignore already translated definitions
-output_file = "data/lod_lux_definitions_zeroshot_4.5.csv"
+output_file = "data/lod_lux_definitions_zeroshot_gpt-5.csv"
 if os.path.exists(output_file):
     data_existing = pd.read_csv(output_file, delimiter="\t")
     data_existing = data_existing[data_existing['lux_definition'].notna()]
@@ -17,12 +25,11 @@ if os.path.exists(output_file):
 
 for i, row in data.iterrows():
 
-    messages = [{"role": "user", "content": f"Translate the English definition to Luxembourgish. Do not use the original word in Luxembourgish for the definition. Stay as close as possible to the English definition, but modify it if the Luxembourgish translation would otherwise sound unnatural. Only return the translation, nothing else.\nLuxembourgish word: {row['lemma']}\nEnglish word definition: {row['wn_definition']}"}]
+    messages = [{"role": "user", "content": f"Translate the {row['definition_language']} definition to Luxembourgish. Do not use the original word in Luxembourgish for the definition. Stay as close as possible to the {row['definition_language']} definition, but modify it if the Luxembourgish translation would otherwise sound unnatural. Only return the translation, nothing else.\nLuxembourgish word: {row['lemma']}\n{row['definition_language']} word definition: {row['wn_definition']}"}]
 
     response = client.chat.completions.create(
-        model="gpt-4.5-preview",
-        messages=messages,
-        temperature=0).choices[0].message.content
+        model="gpt-5",
+        messages=messages).choices[0].message.content
     
     lux_definition = response
     
@@ -35,6 +42,6 @@ for i, row in data.iterrows():
 
 # Add the new translations to the existing file (if it exists)
 if os.path.exists(output_file):
-    pd.concat([data_existing, data.dropna()], ignore_index=True).to_csv(output_file, sep="\t", index=False)
+    pd.concat([data_existing, data.dropna(subset=['lux_definition'])], ignore_index=True).to_csv(output_file, sep="\t", index=False)
 else:
-    data.dropna().to_csv(output_file, sep="\t", index=False)
+    data.dropna(subset=['lux_definition']).to_csv(output_file, sep="\t", index=False)
