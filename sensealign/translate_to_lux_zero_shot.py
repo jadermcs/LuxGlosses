@@ -29,7 +29,9 @@ for i, row in data.iterrows():
 
     response = client.chat.completions.create(
         model="gpt-5",
-        messages=messages).choices[0].message.content
+        messages=messages,
+        reasoning_effort="minimal"
+        ).choices[0].message.content
     
     lux_definition = response
     
