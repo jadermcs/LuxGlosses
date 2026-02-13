@@ -5,16 +5,20 @@ from google import genai
 
 
 def generate_luxembourgish_gloss(client, word, disambiguation, sentence):
-    prompt_with_example = (
-        f"Given the word in Luxembourgish: '{word}' [{disambiguation}] and the example sentence: '{sentence}', "
-        "generate a definition for the word in Luxembourgish. "
-        "Respond only with the definition in Luxembourgish."
-    )
+    prompt_with_example = {
+        "text": (
+            f"Given the word in Luxembourgish: '{word}' [{disambiguation}] and the example sentence: '{sentence}', "
+            "generate a definition for the word in Luxembourgish. "
+            "Respond only with the definition in Luxembourgish."
+        )
+    }
 
-    prompt_without_example = (
-        f"Given the word in Luxembourgish: '{word}' [{disambiguation}], generate a definition for the word in Luxembourgish. "
-        "Respond only with the definition in Luxembourgish."
-    )
+    prompt_without_example = {
+        "text": (
+            f"Given the word in Luxembourgish: '{word}' [{disambiguation}], generate a definition for the word in Luxembourgish. "
+            "Respond only with the definition in Luxembourgish."
+        )
+    }
 
     response_1 = client.models.generate_content(
         model="gemini-3.0-flash",
