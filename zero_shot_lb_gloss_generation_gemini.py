@@ -1,6 +1,8 @@
 import os
+
 import pandas as pd
-from openai import OpenAI
+from google import genai
+
 
 def generate_luxembourgish_gloss(client, word, disambiguation, sentence):
     prompt_with_example = (
@@ -14,36 +16,38 @@ def generate_luxembourgish_gloss(client, word, disambiguation, sentence):
         "Respond only with the definition in Luxembourgish."
     )
 
-    response_1 = client.chat.completions.create(
-        model="gpt-5",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant that writes glosses in Luxembourgish."},
-            {"role": "user", "content": prompt_with_example}
-        ],
-        max_completion_tokens=100,
-        reasoning_effort="minimal"
-        )
-
-    response_2 = client.chat.completions.create(
-        model="gpt-5",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant that writes glosses in Luxembourgish."},
-            {"role": "user", "content": prompt_without_example}
-        ],
-        max_completion_tokens=100,
-        reasoning_effort="minimal"
+    response_1 = client.models.generate_content(
+        model="gemini-3.0-flash",
+        contents=prompt_with_example,
+        config={
+            "max_output_tokens": 100,
+            "temperature": 0,
+            "top_p": 0.95,
+            "top_k": 20,
+        },
     )
 
-    gloss_with_example = response_1.choices[0].message.content.strip()
-    gloss_without_example = response_2.choices[0].message.content.strip()
+    response_2 = client.models.generate_content(
+        model="gemini-3.0-flash",
+        contents=prompt_without_example,
+        config={
+            "max_output_tokens": 100,
+            "temperature": 0,
+            "top_p": 0.95,
+            "top_k": 20,
+        },
+    )
+
+    gloss_with_example = response_1.text.strip()
+    gloss_without_example = response_2.text.strip()
     return gloss_with_example, gloss_without_example
 
 
 if __name__ == "__main__":
-    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    output_file = "data/zero_shot_generated_glosses_gpt-5.csv"
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+    output_file = "data/zero_shot_generated_glosses_gemini.csv"
     # Load the CSV file
-    df = pd.read_csv("data/lod_lux_definitions_zeroshot_gpt-5.csv", sep="\t")
+    df = pd.read_csv("data/lod_lux_definitions_zeroshot_gemini.csv", sep="\t")
 
     if os.path.exists(output_file):
         df_existing = pd.read_csv(output_file)

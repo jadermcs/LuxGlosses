@@ -9,3 +9,4 @@ openai
 wn
 protobuf
 fasttext
+google-genai
